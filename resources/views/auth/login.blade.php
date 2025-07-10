@@ -5,7 +5,7 @@
         <div>{{ $message }}</div>
     @endif
 
-    <form action="/login" method="POST">
+    <form action="{{ route('login') }}" method="POST">
         @csrf
         <div>
             <input type="email" name="email" placeholder="exemple@email.com" value="{{ old('email') }}">
@@ -13,13 +13,10 @@
                 <span>{{ $message }}</span>
             @enderror
         </div>
-
         <br>
-
         <div>
-            <input type="password" name="passoword" placeholder="senha">
+            <input type="password" name="password" placeholder="senha">
         </div>
-
         <br>
         <button type="submit">Entrar</button>
     </form>
