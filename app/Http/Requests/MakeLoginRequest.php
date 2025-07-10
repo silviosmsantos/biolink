@@ -31,7 +31,7 @@ class MakeLoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email', 'max:255'],
-            'email' => ['required'],
+            'password' => ['required'],
         ];
     }
 
@@ -47,8 +47,9 @@ class MakeLoginRequest extends FormRequest
             ->where('email', '=', $this->email)
             ->first()
         ) {
-            if (Hash::check($this->password, $user->passowrd)) {
-                auth->login($user);
+            if (Hash::check($this->password, $user->password)) {
+
+                auth()->login($user);
 
                 return true;
             }

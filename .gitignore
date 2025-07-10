@@ -7,7 +7,7 @@
 /storage/pail
 /vendor
 .env
-.todo.txt
+.TODO.txt
 .env.backup
 .env.production
 .phpactor.json
