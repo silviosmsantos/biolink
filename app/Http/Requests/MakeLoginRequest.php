@@ -42,11 +42,7 @@ class MakeLoginRequest extends FormRequest
 
     public function attempt(): bool
     {
-        if (
-            $user = User::query()
-            ->where('email', '=', $this->email)
-            ->first()
-        ) {
+        if ( $user = User::query()->where('email', '=', $this->email)->first()) {
             if (Hash::check($this->password, $user->password)) {
 
                 auth()->login($user);
