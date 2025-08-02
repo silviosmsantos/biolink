@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -15,10 +15,20 @@ class RegisterController extends Controller
 
     public function register (RegisterRequest $request)
     {
-        if($request->tryToRegister())
+        if($request->attempt())
         {
             return to_route('dashboard');
         }
+
+        $user = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'passoword' => $request->password,
+        ];
+
+        dd($user);
+
+        User::create($user);
 
         return back('')->whit(['message' => 'Falha ao tentar fazer o registro']);
     }
