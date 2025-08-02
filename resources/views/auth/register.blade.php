@@ -33,7 +33,7 @@
         <br>
 
         <div>
-            <input type="password" name="passoword" placeholder="password">
+            <input type="password" name="password" placeholder="password">
             @error('password')
                 <span>{{ $message }}</span>
             @enderror
