@@ -26,8 +26,6 @@ class RegisterController extends Controller
             'passoword' => $request->password,
         ];
 
-        dd($user);
-
         User::create($user);
 
         return back('')->whit(['message' => 'Falha ao tentar fazer o registro']);
