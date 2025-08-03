@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ Route::middleware('guest')->group( function() {
 
 Route::middleware('auth')->group( function() {
     Route::get('/logout', LogoutController::class)->name('logout');
-    Route::get('/dashboard', fn() => 'dashboard :: '. Auth::id())->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     //Links
     Route::prefix('links')->group(function() {
