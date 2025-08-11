@@ -15,8 +15,10 @@ class LinkSeeder extends Seeder
     {
         User::all()
         ->each(function (User $user) {
-            Link::factory()->count(random_int(4, 7))->create([
+            foreach(range(1, random_int(5,8)) as $order)
+            Link::factory()->create([
                 'user_id' => $user->id,
+                'order' => $order,
             ]);
         });
     }

@@ -59,4 +59,32 @@ class LinkController extends Controller
 
         return to_route('dashboard')->with('message', 'Link deletado!');
     }
+
+    public function up(Link $link)
+    {
+        $user = Auth::user();
+        
+        $swapLink = $user->links()
+            ->where('order', '=', $link->order - 1)->first();
+
+        if($swapLink){
+            $swapLink->update(['order' => $link->order]);
+            $link->update(['order' => $link->order - 1]);
+        }
+        return back();
+    }
+
+    public function down(Link $link)
+    {
+        $user = Auth::user();
+        
+        $swapLink = $user->links()
+            ->where('order', '=', $link->order + 1)->first();
+
+        if($swapLink){
+            $swapLink->update(['order' => $link->order]);
+            $link->update(['order' => $link->order + 1]);
+        }
+        return back();
+    }
 }
