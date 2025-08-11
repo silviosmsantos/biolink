@@ -1,5 +1,5 @@
 <div>
-    <h1>Registre-se</h1>
+    <h1>Cire um novo Link</h1>
 
     @if ($message = session()->get('message'))
         <div>{{ $message }}</div>

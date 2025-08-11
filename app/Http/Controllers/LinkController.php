@@ -34,24 +34,57 @@ class LinkController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(link $link)
+    public function edit(Link $link)
     {
-        //
+        return view('links.edit', compact('link'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatelinkRequest $request, link $link)
+    public function update(UpdatelinkRequest $request, Link $link)
     {
-        //
+        $link->fill($request->validated())
+            ->save();
+
+        return to_route('dashboard')->with('message', 'Link atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(link $link)
+    public function destroy(Link $link)
     {
-        //
+        $link->delete();
+
+        return to_route('dashboard')->with('message', 'Link deletado!');
+    }
+
+    public function up(Link $link)
+    {
+        $user = Auth::user();
+        
+        $swapLink = $user->links()
+            ->where('order', '=', $link->order - 1)->first();
+
+        if($swapLink){
+            $swapLink->update(['order' => $link->order]);
+            $link->update(['order' => $link->order - 1]);
+        }
+        return back();
+    }
+
+    public function down(Link $link)
+    {
+        $user = Auth::user();
+        
+        $swapLink = $user->links()
+            ->where('order', '=', $link->order + 1)->first();
+
+        if($swapLink){
+            $swapLink->update(['order' => $link->order]);
+            $link->update(['order' => $link->order + 1]);
+        }
+        return back();
     }
 }

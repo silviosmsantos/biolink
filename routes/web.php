@@ -26,6 +26,11 @@ Route::middleware('auth')->group( function() {
     Route::prefix('links')->group(function() {
         Route::get('create', [LinkController::class, 'create'])->name('links.create');
         Route::post('create', [LinkController::class, 'store']);
+        Route::get('{link}/edit', [LinkController::class, 'edit'])->name('links.edit');
+        Route::put('{link}/edit', [LinkController::class, 'update']);
+        Route::delete('{link}', [LinkController::class, 'destroy'])->name('links.destroy');
+        Route::patch('{link}/up', [LinkController::class, 'up'])->name('links.up');
+        Route::patch('{link}/down', [LinkController::class, 'down'])->name('links.down');
     });
     
 });

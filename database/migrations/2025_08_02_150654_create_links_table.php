@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
+            $table->unsignedTinyInteger('order')->default(0);
             $table->string('name')->require();
             $table->string('link')->require();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
