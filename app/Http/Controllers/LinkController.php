@@ -62,29 +62,13 @@ class LinkController extends Controller
 
     public function up(Link $link)
     {
-        $user = Auth::user();
-        
-        $swapLink = $user->links()
-            ->where('order', '=', $link->order - 1)->first();
-
-        if($swapLink){
-            $swapLink->update(['order' => $link->order]);
-            $link->update(['order' => $link->order - 1]);
-        }
+        $link->moveUp();
         return back();
     }
 
     public function down(Link $link)
     {
-        $user = Auth::user();
-        
-        $swapLink = $user->links()
-            ->where('order', '=', $link->order + 1)->first();
-
-        if($swapLink){
-            $swapLink->update(['order' => $link->order]);
-            $link->update(['order' => $link->order + 1]);
-        }
+        $link->moveDown();
         return back();
     }
 }
