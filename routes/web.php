@@ -23,7 +23,7 @@ Route::middleware('auth')->group( function() {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     //Links
-    Route::prefix('links')->group(function() {
+    Route::prefix('links')->middleware('can:manage,link')->group(function() {
         Route::get('create', [LinkController::class, 'create'])->name('links.create');
         Route::post('create', [LinkController::class, 'store']);
         Route::get('{link}/edit', [LinkController::class, 'edit'])->name('links.edit');
