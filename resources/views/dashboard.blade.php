@@ -8,6 +8,8 @@
     <br>
         <h4>User {{ auth()->user()->name}} :: {{ auth()->user()->id }}</h4>
     <br>
+        <a href="{{ route('users.profile') }}">Atualizar perfil</a>
+    <br>
 
     <a href="{{ route('links.create') }}">Criar um novo link</a>
     <ul>
