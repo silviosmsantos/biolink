@@ -16,9 +16,15 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request)
     {
-        $user = Auth::user();
+        $user = Auth::user();   
 
-        $user->fill($request->validated())->save();
+        $data = $request->validated();
+
+        if($file = $request->photo){
+            $data['photo'] = $file->store('photos', 'public');            
+        }
+
+        $user->fill($data)->save();
 
         return back()->with('message', 'Perfil atualizado com sucesso!');
     }

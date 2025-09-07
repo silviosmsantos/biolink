@@ -5,10 +5,15 @@
         <div>{{ $message }}</div>
     @endif
 
-    <form action="{{ route('users.profile') }}" method="POST">
+    <form action="{{ route('users.profile') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
+        <div>
+            <img src="{{ $user->photo }}" alt="{{ $user->name . ' Profile Picture' }}" width="100" height="100" />
+            <input type="file" name="photo" />
+        </div>
+        <br>
         <div>
             <input name="name" placeholder="Nome" value="{{ old('name', $user->name) }}" />
             @error('name')

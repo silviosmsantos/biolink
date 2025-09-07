@@ -6,6 +6,11 @@ use App\Rules\CheckHandler;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\UploadedFile;
+
+/**
+ * @property-read UploadedFile $photo
+ */
 
 class ProfileRequest extends FormRequest
 {
@@ -27,6 +32,7 @@ class ProfileRequest extends FormRequest
         return [
             'name' => ['required', 'min:3', 'max:50'],
             'description' => ['nullable'],
+            'photo' => ['nullable', 'image'],
             'handler' => [
                 'required', 
                 Rule::unique('users')->ignoreModel(Auth::user()),
