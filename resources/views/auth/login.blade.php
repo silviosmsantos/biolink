@@ -1,5 +1,5 @@
 <x-layout.app>
-    <div class="mx-auto max-w-screen-md py-20 flex items-center justify-center">
+    <x-container>
         <div class="card bg-base-200 w-96 shadow-xl">
 
             @if ($message = session()->get('message'))
@@ -28,5 +28,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </x-container>
 </x-layout.app>
