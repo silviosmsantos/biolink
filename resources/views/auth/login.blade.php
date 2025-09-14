@@ -1,23 +1,32 @@
-<div>
-    <h1>Login</h1>
+<x-layout.app>
+    <x-container>
+        <div class="card bg-base-200 w-96 shadow-xl">
 
-    @if ($message = session()->get('message'))
-        <div>{{ $message }}</div>
-    @endif
+            @if ($message = session()->get('message'))
+                <div>{{ $message }}</div>
+            @endif
 
-    <form action="{{ route('login') }}" method="POST">
-        @csrf
-        <div>
-            <input type="email" name="email" placeholder="exemple@email.com" value="{{ old('email') }}">
-            @error('email')
-                <span>{{ $message }}</span>
-            @enderror
+            <div class="card-body">
+                <div class="card-title">Login</div>
+                <form action="{{ route('login') }}" method="POST" id="login-form">
+                        @csrf
+                        <div class="mb-6 mt-4">
+                            <input class="input" type="email" name="email" placeholder="exemple@email.com" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="text-small text-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-6">
+                            <input class="input" type="password" name="password" placeholder="senha">
+                            @error('password')
+                                <div class="text-small text-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+                </form>
+                <div class="card-actions justify-end">
+                    <button class ="btn btn-primary" type="submit" form="login-form">Entrar</button>
+                </div>
+            </div>
         </div>
-        <br>
-        <div>
-            <input type="password" name="password" placeholder="senha">
-        </div>
-        <br>
-        <button type="submit">Entrar</button>
-    </form>
-</div>
+    </x-container>
+</x-layout.app>
