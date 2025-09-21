@@ -25,9 +25,10 @@ Route::middleware('auth')->group( function() {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     //Links
+    Route::get('links/create', [LinkController::class, 'create'])->name('links.create');
+    Route::post('links/create', [LinkController::class, 'store'])->name('links.store');
+    
     Route::prefix('links')->middleware('can:manage,link')->group(function() {
-        Route::get('create', [LinkController::class, 'create'])->name('links.create');
-        Route::post('create', [LinkController::class, 'store']);
         Route::get('{link}/edit', [LinkController::class, 'edit'])->name('links.edit');
         Route::put('{link}/edit', [LinkController::class, 'update']);
         Route::delete('{link}', [LinkController::class, 'destroy'])->name('links.destroy');
