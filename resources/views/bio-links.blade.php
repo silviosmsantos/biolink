@@ -1,28 +1,36 @@
 <x-layout.app>
-    <div>
-        <h1>Bio Links</h1>
+    <x-container>
 
-        @if($message = session()->get('message') )
-            <div>{{ $message }}</div>
-        @endif
-        <img src="{{ $user->photo }}" />
-        <br>
-            <h4>User {{ $user->name }} :: {{ $user->handler }}</h4>
-        <br>
-            <h4>Description :: {{ $user->description }}</h4>
-        <br>
-            <a href="{{ route('users.profile') }}">Atualizar perfil</a>
-        <br>
 
-        <a href="{{ route('links.create') }}">Criar um novo link</a>
-        <ul>
-            @foreach ($user->links as $link)
-                <li style = "display:flex;">
-                    
-                    <a href={{ $link->link }} target="_blank"> {{ $link->id }} - {{ $link->name }} </a>
+        <div class="max-w-md mx-auto flex flex-col items-center space-y-6 text-center">
+            
+            <x-img 
+                src="/storage/{{ $user->photo }}" 
+                alt="{{ $user->name . ' Profile Picture' }}" 
+                class="w-32 h-32 rounded-full object-cover shadow-md"
+            />
 
-                </li>
-            @endforeach
-        </ul>
-    </div>
+            <h1 class="font-bold text-2xl tracking-wide">
+                {{ $user->name }}
+            </h1>
+
+            @if($user->description)
+                <p class="text-sm text-gray-600 dark:text-gray-400 max-w-xs">
+                    {{ $user->description }}
+                </p>
+            @endif
+
+            
+            <ul class="w-full space-y-3">
+                @foreach ($user->links as $link)
+                    <li class="flex items-center justify-center gap-2">
+                        <x-button :href="$link->link" block outline target="_blank">
+                            {{ $link->name }}
+                        </x-button>
+                    </li>
+                @endforeach
+            </ul>
+
+        </div>
+    </x-container>
 </x-layout.app>
